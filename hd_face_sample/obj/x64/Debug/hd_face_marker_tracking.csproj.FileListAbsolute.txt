@@ -33,3 +33,6 @@ D:\MyDocuments\kinect\hd_face_sample\old160322_2\hd_face_sample\obj\x64\Debug\hd
 D:\MyDocuments\kinect\hd_face_sample\old160322_2\hd_face_sample\obj\x64\Debug\hd_face_marker_tracking.csproj.GenerateResource.Cache
 D:\MyDocuments\kinect\hd_face_sample\old160322_2\hd_face_sample\obj\x64\Debug\hd_face_sample.exe
 D:\MyDocuments\kinect\hd_face_sample\old160322_2\hd_face_sample\obj\x64\Debug\hd_face_sample.pdb
+D:\Users\ogata\Source\Repos\hd_face_marker_tracking\hd_face_sample\bin\x64\Debug\hd_face_sample.exe.config
+D:\Users\ogata\Source\Repos\hd_face_marker_tracking\hd_face_sample\obj\x64\Debug\hd_face_sample.exe
+D:\Users\ogata\Source\Repos\hd_face_marker_tracking\hd_face_sample\obj\x64\Debug\hd_face_sample.pdb

@@ -50,17 +50,7 @@ namespace hd_face_marker_tracking
         // Used to display 1,000 points on screen.
         private List<Ellipse> _points = new List<Ellipse>();
 
-        //カラーフレームリーダーオブジェクト
-        //private ColorFrameReader colorFrameReader = null;
-
-        //private FrameDescription colorFrameDescription = null;
-
-        // IRフレームリーダーオブジェクト
-        //private InfraredFrameReader infraredFrameReader = null;
-
-        //// depth frame reader
-        //private DepthFrameReader depthFrameReader = null;
-
+        // IR + depth frame reader = multisource Frame reader
         private MultiSourceFrameReader multiFrameReader = null; 
 
         private FrameDescription infraredFrameDescription = null;
