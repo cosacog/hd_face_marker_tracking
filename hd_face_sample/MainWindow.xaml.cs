@@ -88,22 +88,11 @@ namespace hd_face_marker_tracking
                 _faceModel = new FaceModel();
                 _faceAlignment = new FaceAlignment();
 
-                // ----------------
-                // カラーフレームの設定
-                // --------------------
-                // カラーフレームのリーダーを取得してメンバ変数にセット
-                //this.colorFrameReader = _sensor.ColorFrameSource.OpenReader();
-                //this.infraredFrameReader = _sensor.InfraredFrameSource.OpenReader();
-
-                // Depth reader
-                //this.depthFrameReader = _sensor.DepthFrameSource.OpenReader();
-
                 // multi frame reader
                 this.multiFrameReader = _sensor.OpenMultiSourceFrameReader(FrameSourceTypes.Depth |
                                                                            FrameSourceTypes.Infrared);
 
-                // カラーフレームの情報取得用オブジェクト取得
-                //colorFrameDescription = _sensor.ColorFrameSource.CreateFrameDescription(ColorImageFormat.Bgra);
+                // IRフレームの情報取得用オブジェクト取得
                 infraredFrameDescription = _sensor.InfraredFrameSource.FrameDescription;
 
                 // Depth Frame description
@@ -112,23 +101,13 @@ namespace hd_face_marker_tracking
                 infraredRect = new Int32Rect(0, 0, infraredFrameDescription.Width, infraredFrameDescription.Height);
                 depthRect = new Int32Rect(0, 0, depthFrameDescription.Width, depthFrameDescription.Height);
 
-                // カラーフレーム到着(発生)のハンドラーをセット
-                //colorFrameReader.FrameArrived += ReaderColorFrameArrived;
-                //infraredFrameReader.FrameArrived += ReaderInfraredFrameArrived;
-
-                // Depth frame arrive event handler
-                //depthFrameReader.FrameArrived += ReaderDepthFrameArrived;
-
-                // multistream event handler
+                // multistream event handlerをセット
                 multiFrameReader.MultiSourceFrameArrived += ReaderMultiFrameArrived;
 
                 // -----------------------------------------
-                // カラーフレームの画面表示用設定
+                // IRフレームの画面表示用設定
                 // -----------------------------------------
                 // 表示用のWritableBitmapを作成
-                //infraredBitmap = new WriteableBitmap(this.colorFrameDescription.Width,
-                //                                           this.colorFrameDescription.Height,
-                //                                           96.0, 96.0, PixelFormats.Bgr32, null);
                 infraredBitmap = new WriteableBitmap(this.infraredFrameDescription.Width,
                     this.infraredFrameDescription.Height, 96.0, 96.0, PixelFormats.Gray16, null);
 
@@ -136,7 +115,7 @@ namespace hd_face_marker_tracking
                 depthBitmap = new WriteableBitmap(this.depthFrameDescription.Width,
                     this.depthFrameDescription.Height, 96.0, 96.0, PixelFormats.Gray16, null);
                 // WriteableBitmapをWPFのImageコントローラーのソースに関連付け
-                //ColorImage.Source = this.infraredBitmap;
+                //ColorImage.Source = this.infraredBitmap; //ここでは動かない
 
                 // start tracking
                 _sensor.Open();
@@ -181,7 +160,6 @@ namespace hd_face_marker_tracking
         }
 
         // Step8: Draw the points on screen
-
         private void UpdateFacePoints()
         {
             if (_faceModel == null) return;
@@ -363,8 +341,6 @@ namespace hd_face_marker_tracking
                     var infraredData = new ushort[width * height]; // ushort array
                     infraredFrame.CopyFrameDataToArray(infraredData);
                     this.infraredBitmap.Lock();
-                    //this.infraredBitmap = new WriteableBitmap(BitmapSource.Create(width, height, 96, 96,
-                    //    PixelFormats.Gray16, null, infraredData, width * (int)infraredFrameDescription.BytesPerPixel));
                     this.infraredBitmap.WritePixels(infraredRect, infraredData, width * (int)infraredFrameDescription.BytesPerPixel, 0);
                     //depthImage.WritePixels(depthRect, depthBuffer, depthStride, 0);// template
                     this.infraredBitmap.Unlock();
@@ -455,17 +431,6 @@ namespace hd_face_marker_tracking
                 //label_sample.Content = list_arr_index.Count().ToString();
                 Console.WriteLine("hoge");//ブレイクポイント用
             }
-
-
-
-            // おまけ
-            // blobs.Label(mm);
-            //Mat imgRender = new Mat(mm.Size, MatType.CV_8UC3);
-            //imgIR.SaveImage("D:/imgIR.png");
-            //label_sample.Content = imgIR.MinMaxIdx();
-            //label_sample.Content = blobs.Count.ToString();
         }
-
-
     }
 }
