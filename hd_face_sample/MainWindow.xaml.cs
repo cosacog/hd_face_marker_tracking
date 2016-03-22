@@ -63,8 +63,6 @@ namespace hd_face_marker_tracking
         private Int32Rect infraredRect;
         private Int32Rect depthRect;
 
-        //private List<Rectangle> _blobs = new List<Rectangle>();
-
         private int[] centXY = new int[2];
 
         // IRフレーム中のblobのindex配列をまとめたlist
